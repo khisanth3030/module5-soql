@@ -27,7 +27,7 @@ public with sharing class SOQLTest {
 		insert new List<Lead>{ testLead1, testLead2 };
 
 		// Call the method to test
-		List<Lead> leads = getAllLeads(); 
+		List<Lead> leads = SOQL.getAllLeads(); 
 		//Replace null with your method call from SOQL class
 
 		// Assert that the number of leads returned is correct
