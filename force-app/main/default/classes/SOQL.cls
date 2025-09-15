@@ -29,7 +29,11 @@ public with sharing class SOQL {
 	 */
 	//[public | private ] [static] data_type method_name (input parameters) {
 	//  The body of the method
-	//}
+	private static List<Lead> getAllLeads(){
+		List<Lead> result = [SELECT Id,LastName, Company, Phone, Email FROM Lead];
+
+		return result;
+	}
 
 	/**
 	 * Question 2
