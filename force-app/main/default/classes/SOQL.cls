@@ -45,7 +45,7 @@ public with sharing class SOQL {
 	//[public | private ] [static] data_type method_name (input parameters) {
 	//  The body of the method
 	//}
-	public static List<Contact> GetContactsByFirstName(){
+	public static List<Contact> getContactsByFirstName(){
 		List<Contact> result = new List<Contact>();
 		result = [SELECT Id, Name, FirstName FROM Contact WHERE FirstName = 'John'];
 		return result;
@@ -62,7 +62,15 @@ public with sharing class SOQL {
 	//[public | private ] [static] data_type method_name (input parameters) {
 	//  The body of the method
 	//}
+	public static List<Id> getContactIdsByLastName(){
+		List<Id> result = new List<Id>();
+		Map<Id,Contact> myContactsMap = new Map<Id,Contact>();
 
+		myContactsMap = new Map<Id,Contact>([SELECT Id, Name, LastName FROM Contact 
+							WHERE LastName = 'Smith' OR LastName = 'Jones']);
+		result.addAll( myContactsMap.keySet() );
+		return result;
+}
 	/**
 	 * Question 4
 	 * Update/Uncomment the template code to create a method
