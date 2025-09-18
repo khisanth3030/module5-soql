@@ -45,6 +45,12 @@ public with sharing class SOQL {
 	//[public | private ] [static] data_type method_name (input parameters) {
 	//  The body of the method
 	//}
+	public static List<Contact> GetContactsByFirstName(){
+		List<Contact> result = new List<Contact>();
+		result = [SELECT Id, Name, FirstName FROM Contact WHERE FirstName = 'John'];
+		return result;
+	}
+
 
 	/**
 	 * Question 3
