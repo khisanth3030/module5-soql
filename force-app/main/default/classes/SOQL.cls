@@ -150,7 +150,10 @@ public with sharing class SOQL {
 	 * @return A list of Opportunity records.
 	 */
 	public static List<Opportunity> getOpportunitiesByNameKeyword(String keyword) {
-		return null; // Replace null with the variable you used to store the result
+		List<Opportunity> result = new List<Opportunity>();
+		String keyMatch = '%' + keyword + '%';
+		result = [SELECT Id, Name FROM Opportunity WHERE Name LIKE :keyMatch];
+		return result; // Replace null with the variable you used to store the result
 	}
 
 	/**
