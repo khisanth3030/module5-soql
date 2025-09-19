@@ -117,6 +117,13 @@ public with sharing class SOQL {
 	//[public | private ] [static] data_type method_name (input parameters) {
 	//  The body of the method
 	//}
+	public static Map<Id,Task> getTasksDueNextWeek(){
+		Map<Id,Task> result = new Map<Id,Task> ();
+		result = new Map<Id,Task> ( [SELECT Id, Subject, ActivityDate FROM Task 
+										WHERE ActivityDate <= NEXT_N_DAYS:7] );
+		return result;
+	}
+
 
 	/**
 	 * Question 7
