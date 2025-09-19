@@ -83,6 +83,14 @@ public with sharing class SOQL {
 	//[public | private ] [static] data_type method_name (input parameters) {
 	//  The body of the method
 	//}
+	public static List<Opportunity> getClosedWonOpportunityCountByAccount(String accountId){
+		List<Opportunity> result = new List<Opportunity>();
+
+		result = [SELECT Id, AccountId, Name, StageName, CloseDate, Amount FROM Opportunity 
+					WHERE StageName = 'Closed Won' AND AccountId = :accountId];
+		return result;
+	}
+
 
 	/**
 	 * Question 5
