@@ -135,6 +135,12 @@ public with sharing class SOQL {
 	//[public | private ] [static] data_type method_name (input parameters) {
 	//  The body of the method
 	//}
+	public static List<Contact> getContactsByEmailDomain(){
+		List<Contact> result = new List<Contact>();
+		result = [SELECT Id, Name, Email FROM Contact WHERE Email LIKE '%example.com'];
+		return result;
+	}
+
 
 	/**
 	 * Question 8
