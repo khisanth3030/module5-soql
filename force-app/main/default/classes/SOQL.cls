@@ -102,7 +102,11 @@ public with sharing class SOQL {
 	//[public | private ] [static] data_type method_name (input parameters) {
 	//  The body of the method
 	//}
+	public static Integer getAccountCount(){
 
+		return [SELECT COUNT() FROM Account];
+
+	}
 	/**
 	 * Question 6
 	 * Update/Uncomment the template code to create a method
