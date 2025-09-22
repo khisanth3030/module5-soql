@@ -197,16 +197,16 @@ public with sharing class SOQL {
 	 * @return A list of Contact LastName.
 	 */
 	public static List<String> getContactNamesByAccount(Id accountId) {
-		// Create a list to hold the Contact LastNames
 
-		// Query the Contacts
-		// Loop through each Contact and add the LastName to the list
-		//for () {
-		//
-		//}
-
-		// Return the list of Contact LastNames
-		return null; // Replace null with the variable you used to store the result
+		List<Contact> myContacts = new List<Contact>();
+		List<String> result = new List<String>();
+		myContacts = [SELECT Id, LastName, AccountId FROM Contact 
+							WHERE AccountId = :accountId ORDER BY LastName ASC];
+		for(Contact con : myContacts){
+			result.add(con.LastName);
+		}
+		return result;
+		 	
 	}
 
 	/**

@@ -387,7 +387,10 @@ public with sharing class SOQLTest {
 		// Assert that the contact names returned are correct
 		try {
 			for (Contact cont : accountContacts.get(testAccount.Id)) {
-				System.assert(contactNames.contains(cont.LastName), 'Contact name is incorrect.');
+				//System.debug(testAccount.Id);
+				//System.debug(contactNames);
+				//System.debug(cont.LastName);
+				System.assert(contactNames.contains(cont.LastName), 'Contact name is incorrect.' + cont.LastName);
 			}
 		} catch (Exception ex) {
 			Assert.fail('Exception thrown: ' + ex.getMessage());
