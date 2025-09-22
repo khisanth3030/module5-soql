@@ -181,6 +181,13 @@ public with sharing class SOQL {
 	//[public | private ] [static] data_type method_name (input parameters) {
 	//  The body of the method
 	//}
+	public static List<Lead> getLeadsBySourceOrTitle(String leadSource, String keyword){
+		List<Lead> result = new List<Lead>();
+		String keyMatch = '%' + keyword + '%';
+		result = [SELECT Id, LeadSource, Title, LastName, Phone, Email, Company FROM Lead 
+		WHERE LeadSource =:leadSource OR Title LIKE :keyMatch];
+		return result;
+	}
 
 	/**
 	 * Question 11
