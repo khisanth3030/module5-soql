@@ -288,14 +288,14 @@ public with sharing class SOQL {
 	 */
 	public static Set<Id> getCaseIdsByAccount(Id accountId) {
 		// Create a set to hold the Case Ids
+		Set<Id> caseIds = new Set<Id>();
+		Map<Id,Case> myCasesMap = new Map<Id,Case>();
 
-		// Query the Cases
-		// Loop through each Case and add the Id to the set
-		//for () {
-		//
-		//}
+		myCasesMap = new Map<Id,Case>([SELECT Id, AccountId, Subject FROM Case 
+							WHERE AccountId = :accountId]);	
+		caseIds = myCasesMap.keySet();	
 
-		return null; // Replace null with the variable you used to store the result
+		return caseIds; // Replace null with the variable you used to store the result
 	}
 
 	/**
