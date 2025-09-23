@@ -257,7 +257,12 @@ public with sharing class SOQL {
 	 * @return A list of Contacts
 	 */
 	public static List<Contact> getBirthdateContacts() {
-		return null; // Replace null with the variable you used to store the result
+		List<Contact> result = new List<Contact>();
+
+		result = [SELECT Id, Name, Birthdate FROM Contact 
+						WHERE Birthdate != null ORDER BY Birthdate DESC LIMIT 3];
+
+		return result; // Replace null with the variable you used to store the result
 	}
 
 	/**
