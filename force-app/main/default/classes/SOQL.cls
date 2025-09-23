@@ -232,7 +232,9 @@ public with sharing class SOQL {
 	 * @return A list of the first 10 Accounts ordered by Name.
 	 */
 	public static List<Account> getFirstTenAccounts() {
-		return null; // Replace null with the variable you used to store the result
+		List<Account> result = new List<Account>();
+		result = [SELECT Id, Name FROM Account ORDER BY Name ASC LIMIT 10];
+		return result; // Replace null with the variable you used to store the result
 	}
 
 	/**
