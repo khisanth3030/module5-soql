@@ -379,7 +379,10 @@ public with sharing class SOQL {
 		List<Lead> leadList = new List<Lead>();
 		Map<String, Account> domainToAccountMap = new Map<String, Account>();
 		Set<String> emailDomains = new Set<String>();
-		
+
+
+
+
 		// Query the Leads
 
 		// Create a set of email domains from the Leads
@@ -405,6 +408,11 @@ public with sharing class SOQL {
 	 * @param List of cloned Opportunity Ids
 	 */
 	public static void cloneLineItems(Id origOppId, List<Id> cloneOppIds) {
+
+		List<OpportunityLineItem> origLineItems = new List<OpportunityLineItem>();
+		List<OpportunityLineItem> newLineItems = new List<OpportunityLineItem>();
+
+
 		// Query the original Opportunity Line Items
 
 		// Create a list to hold the new line items
