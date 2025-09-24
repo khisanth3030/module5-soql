@@ -354,12 +354,16 @@ public with sharing class SOQL {
 	 * @return List of contacts with the same Mailing State as the Account Billing State
 	 */
 	public static List<Contact> getAccountsWithContactsByState(Id accountId) {
-		// Query the Account
+		List<Contact> contactList = new List<Contact>();
+		
+		Account acct = [SELECT Id, BillingState FROM Account 
+		WHERE Id = :accountId LIMIT 1];
 
-		// Store the Account's BillingState
+		contactList = [SELECT Id, Name, MailingState, Account.BillingState FROM Contact 
+						WHERE MailingState != null AND Account.BillingState != null 
+						AND MailingState = :acct.BillingState];
 
-		// Query the Contacts
-		return null; // Replace null with the variable you used to store the result
+		return contactList; 
 	}
 
 	/**
