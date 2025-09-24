@@ -315,7 +315,7 @@ public with sharing class SOQL {
 		for(Account acct : acctList){
 			accountIdsToNames.put(acct.Id, acct.Name);
 		}
-		
+
 		return accountIdsToNames; 
 	}
 
@@ -327,7 +327,9 @@ public with sharing class SOQL {
 	 * @return The Account Name of the Contact.
 	 */
 	public static String getAccountNameForContact(String contactId) {
-		return null; // Replace null with the variable you used to store the result
+		Contact con = [SELECT Id, Name, Account.Name FROM Contact WHERE Id = :contactId LIMIT 1];
+
+		return con.Account.Name; // Replace null with the variable you used to store the result
 	}
 
 	/**
