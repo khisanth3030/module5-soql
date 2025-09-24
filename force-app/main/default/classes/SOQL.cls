@@ -375,6 +375,11 @@ public with sharing class SOQL {
 	 * @return A list of Accounts with matching email domains.
 	 */
 	public static List<Account> findAccountsByLeadEmailDomains(Set<Id> leadIds) {
+		List<Account> accountList = new List<Account>();
+		List<Lead> leadList = new List<Lead>();
+		Map<String, Account> domainToAccountMap = new Map<String, Account>();
+		Set<String> emailDomains = new Set<String>();
+		
 		// Query the Leads
 
 		// Create a set of email domains from the Leads
@@ -388,7 +393,7 @@ public with sharing class SOQL {
 		// Add the email domain to the set
 
 		// Query the Accounts
-		return null; // Replace null with the variable you used to store the result
+		return accountList; // Replace null with the variable you used to store the result
 	}
 
 	/**
