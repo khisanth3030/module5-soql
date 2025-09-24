@@ -375,28 +375,46 @@ public with sharing class SOQL {
 	 * @return A list of Accounts with matching email domains.
 	 */
 	public static List<Account> findAccountsByLeadEmailDomains(Set<Id> leadIds) {
-		List<Account> accountList = new List<Account>();
 		List<Lead> leadList = new List<Lead>();
-		Map<String, Account> domainToAccountMap = new Map<String, Account>();
 		Set<String> emailDomains = new Set<String>();
-
-
-
+		Map<String, Account> domainToAccountMap = new Map<String, Account>();
+		List<Account> accountList = new List<Account>();
+		List<Account> result = new List<Account>();
 
 		// Query the Leads
+		leadList = [SELECT Id, Email FROM Lead WHERE Id IN :leadIds];
 
 		// Create a set of email domains from the Leads
-
 		// Loop through each Lead
-
 		// Get the email from the Lead
-
-		// Check if the email is not null
-
+		// Check if the email is not null and contains '@'
 		// Add the email domain to the set
+		for(Lead lead : leadList) {
+			if(lead.Email != null && lead.Email.contains('@')) {
+				String emailDomain = lead.Email.substringAfter('@');
+				emailDomains.add(emailDomain);
+			}
+		}
+		// Query Accounts where website not null 
+		accountList = [SELECT Id, Name, Website FROM Account WHERE Website != null];
 
-		// Query the Accounts
-		return accountList; // Replace null with the variable you used to store the result
+		// Create a map of email domains to Accounts
+		for(Account acct : accountList){
+			String websiteDomain = acct.Website.substringAfter('www.');
+			domainToAccountMap.put(websiteDomain, acct);
+		}
+
+		// Loop through each email domain
+		for(String emailDomain : emailDomains) {
+			// Check if the email domain is in the map emailDomains
+			// If it is, add the Account to the result list			
+			if(domainToAccountMap.containsKey(emailDomain)) {
+				Account acct = domainToAccountMap.get(emailDomain);
+				result.add(acct);
+			}
+		}
+
+		return result; // Replace null with the variable you used to store the result
 	}
 
 	/**
@@ -448,6 +466,7 @@ public with sharing class SOQL {
 	 */
 	public static void setPrimaryContact() {
 		//Use the getOpportunityDetailsForClosedWon() method to get the Opportunities
+		List<Opportunity> oppWonList = getOpportunityDetailsForClosedWon();
 
 		// Create a set of Account Ids from the Opportunities
 
