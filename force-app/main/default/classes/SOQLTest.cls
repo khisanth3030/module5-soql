@@ -838,13 +838,21 @@ public with sharing class SOQLTest {
 		standardPrice.UseStandardPrice = false;
 		insert standardPrice;
 
-		OpportunityLineItem testLineItem = new OpportunityLineItem(
+		OpportunityLineItem testLineItem1 = new OpportunityLineItem(
 			OpportunityId = testOpp1.Id,
 			Quantity = 5,
 			PricebookEntryId = standardPrice.Id,
 			TotalPrice = 500
 		);
-		insert testLineItem;
+		insert testLineItem1;
+
+		OpportunityLineItem testLineItem2 = new OpportunityLineItem(
+			OpportunityId = testOpp1.Id,
+			Quantity = 7,
+			PricebookEntryId = standardPrice.Id,
+			TotalPrice = 700
+		);
+		insert testLineItem2;
 
 		// Call the method to test
 		SOQL.cloneLineItems(testOpp1.Id, new List<Id>{ testOpp2.Id });
@@ -857,8 +865,9 @@ public with sharing class SOQLTest {
 		];
 
 		// Assert that the line items were cloned correctly
-		System.assertEquals(1, clonedLineItems.size(), 'Number of cloned line items is incorrect.');
-		System.assertEquals(100, clonedLineItems[0].UnitPrice, 'Cloned line item UnitPrice is incorrect.');
+		System.assertEquals(2, clonedLineItems.size(), 'Number of cloned line items is incorrect.');
+		System.assertEquals(100, clonedLineItems[0].UnitPrice, 'Cloned line item 1 UnitPrice is incorrect.');
+		System.assertEquals(100, clonedLineItems[1].UnitPrice, 'Cloned line item 2 UnitPrice is incorrect.');
 	}
 
 	@IsTest
